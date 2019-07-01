@@ -11,7 +11,9 @@ Use the OpenWeatherMap API
 Background image: unsplash.com
 
 ## To do
-- [ ] Setup API to download for a city.
+- [x] Setup API to download for a city. https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=YOUR_API_KEY 
+- [ ] Write download API code
+- [ ] Display only weather description
 - [ ] Show weather in app
 - [ ] Create input screen to enter city
 - [ ] Use API with city on button click
