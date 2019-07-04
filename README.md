@@ -13,8 +13,8 @@ Background image: unsplash.com
 ## To do
 - [x] Setup API to download for a city. https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=YOUR_API_KEY 
 - [x] Write download API code
-- [ ] Get result into Json object
-- [ ] Display only weather description
-- [ ] Show weather in app
+- [x] Get result into Json object
+- [x] Display only weather description
+- [x] Show weather in app
 - [ ] Create input screen to enter city
 - [ ] Use API with city on button click

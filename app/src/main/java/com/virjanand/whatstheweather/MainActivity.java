@@ -3,6 +3,12 @@ package com.virjanand.whatstheweather;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String weatherDescription = getWeatherDescription();
+        TextView weatherText = findViewById(R.id.weatherText);
+        weatherText.setText(weatherDescription);
+    }
+
+    private String getWeatherDescription() {
         WeatherDownloader task = new WeatherDownloader();
         String result = "";
         try {
@@ -27,7 +39,16 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(result);
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            String weatherInfo = jsonObject.getString("weather");
+            JSONArray weatherDescriptionJSON = new JSONArray(weatherInfo);
+            String weatherDescription = weatherDescriptionJSON.getJSONObject(0).getString("description");
+            return weatherDescription;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public class WeatherDownloader extends AsyncTask<String, Void, String> {
@@ -41,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 InputStreamReader reader = new InputStreamReader(in);
                 int data = reader.read();
                 while (data != -1) {
-                    result += data;
+                    char current = (char) data;
+                    result += current;
                     data = reader.read();
                 }
                 return result;
