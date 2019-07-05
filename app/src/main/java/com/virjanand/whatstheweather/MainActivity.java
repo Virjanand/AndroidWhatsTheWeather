@@ -20,20 +20,27 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String city;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView cityTextView = (TextView) findViewById(R.id.cityText);
+        city = cityTextView.getText().toString();
+
         String weatherDescription = getWeatherDescription();
         TextView weatherText = findViewById(R.id.weatherText);
         weatherText.setText(weatherDescription);
+
     }
 
     private String getWeatherDescription() {
         WeatherDownloader task = new WeatherDownloader();
         String result = "";
         try {
-            result = task.execute("https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=714b523529f97f47f15f008164ee02c7").get();
+            result = task.execute("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",uk&appid=714b523529f97f47f15f008164ee02c7").get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
