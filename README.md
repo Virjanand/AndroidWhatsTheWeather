@@ -16,5 +16,5 @@ Background image: unsplash.com
 - [x] Get result into Json object
 - [x] Display only weather description
 - [x] Show weather in app
-- [ ] Create input screen to enter city
-- [ ] Use API with city on button click
+- [x] Create input screen to enter city
+- [x] Use API with city on button click
